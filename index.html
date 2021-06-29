@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Javascript Quiz</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" type="text/css" href="style.css" />
+    </head>
+
+    <body>
+        <header>
+            <div class= "large-font">Javascript Quiz</div>
+            <button class= "start-button">Start</button>
+        </header>
+        <main>
+            <div class= "timer"></div>
+                <!-- <div class= "timer-text"></div> -->
+                <div class= "timer-count">60</div>
+            <div class= "questions"></div>
+            <div class= "answer-choices">
+                <ul>
+                    <li class= "option1"></li>
+                    <li class= "option2"></li>
+                    <li class= "option3"></li>
+                    <li class= "option4"></li>
+                </ul>
+            </div>
+            <!-- <button class= "next-button">Next</button> -->
+            <div class= "results">
+                <label>Enter your initials</label>
+                <input class= "initials" type="text"/>
+                <button class= "submit">Submit</button>
+            </div>
+            <div class= "high-scores">
+                <button class= "try-again">Try Again</button>
+                <button>Clear Scores</button>
+                <!-- <p>High Scores Banner</p> -->
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Initials</th>
+                            <th>Correct Answers</th>
+                            <th>Seconds Remaining</th>
+                        </tr>
+                    </thead>
+                    <tbody class= "table"></tbody>
+                </table>
+            </div>
+        </main>
+        <script src="script.js"></script>
+    </body>
+</html>
+
