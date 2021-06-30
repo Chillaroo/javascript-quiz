@@ -24,89 +24,92 @@ var option2= document.querySelector(".option2");
 var option3= document.querySelector(".option3");
 var option4= document.querySelector(".option4");
 var timer;
-
 var timerCount;
 var score=0;
-
 var currentQuestion = 0;
+var correct= document.getElementById("correct");
+var incorrect= document.getElementById("incorrect");
 /* var nextButton = document.querySelector(".next-button"); */
 var results= document.querySelector(".results");
 var highScores= document.querySelector(".high-scores");
 var submit= document.querySelector(".submit");
 var tryAgain= document.querySelector(".try-again");
 var highScores= document.querySelector(".high-scores");
+var tableBody= document.querySelector(".table-body");
+var clearScores= document.querySelector(".clear-scores");
+var table= document.querySelector(".table");
 var questionBank= [
-    "first question",
-    "second question",
-    "third question",
-    "fourth question",
-    "fifth question",
-    "sixth question",
-    "seventh question",
-    "eigth question",
-    "ninth question",
-    "tenth question"
+    "How do you initialize an empty array?",
+    "How do you create an event listener?",
+    "How do you access the number 2 in the array [1,2,3,4]?",
+    "Which HTML element is used to interpret JavaScript?",
+    "How do you start a for loop?",
+    "Which of the following is NOT a valid keyword to create a variable?",
+    "How do you initialize an object with one key and one value?",
+    "How do you pick a random element in an array?",
+    "Which of the following is NOT a valid way to create a function?",
+    "Which of the following does NOT get an element from HTML?"
 ];
 var answerChoices= [
     {
-        c: "correct 1",
-        w1: "wrong 1-1",
-        w2: "wrong 1-2",
-        w3: "wrong 1-3"
+        c: "var nameOfArray = [];",
+        w1: "[];",
+        w2: "var nameOfArray = ();",
+        w3: "();"
     },
     {
-        c: "correct 2",
-        w1: "wrong 2-1",
-        w2: "wrong 2-2",
-        w3: "wrong 2-3"
+        c: "nameOfElement.addEventListener(\"event\",nameOfFunction)",
+        w1: "nameOfElement.addEventListener(nameOfFunction,\"event\")",
+        w2: "addEventListener.nameOfElement(\"event\",nameOfFunction)",
+        w3: "addEventListener.nameOfElement(nameOfFunction,\"event\")"
     },
     {
-        c: "correct 3",
-        w1: "wrong 3-1",
-        w2: "wrong 3-2",
-        w3: "wrong 3-3"
+        c: "nameOfArray[1]",
+        w1: "nameOfArray[2]",
+        w2: "nameOfArray[3]",
+        w3: "nameOfArray[4]"
     },
     {
-        c: "correct 4",
-        w1: "wrong 4-1",
-        w2: "wrong 4-2",
-        w3: "wrong 4-3"
+        c: "<script>",
+        w1: "<scripting>",
+        w2: "<javascript>",
+        w3: "<js>"
     },
     {
-        c: "correct 5",
-        w1: "wrong 5-1",
-        w2: "wrong 5-2",
-        w3: "wrong 5-3"
+        c: "for (var i=0; i<=3; i++)",
+        w1: "for i=1 to 3",
+        w2: "for (i=0; i<=3)",
+        w3: "for(i<=3;i++)"
     },
     {
-        c: "correct 6",
-        w1: "wrong 6-1",
-        w2: "wrong 6-2",
-        w3: "wrong 6-3"
+        c: "int",
+        w1: "var",
+        w2: "let",
+        w3: "const"
     },
     {
-        c: "correct 7",
-        w1: "wrong 7-1",
-        w2: "wrong 7-2",
-        w3: "wrong 7-3"
+        c: "nameOfObject = {key:value}",
+        w1: "nameOfObject = {value:key}",
+        w2: "nameOfObject = [key:value]",
+        w3: "nameOfObject = [value:key]"
     },
     {
-        c: "correct 8",
-        w1: "wrong 8-1",
-        w2: "wrong 8-2",
-        w3: "wrong 8-3"
+        c: "nameOfArray[Math.floor(Math.random()*(nameOfArray.length))]",
+        w1: "nameOfArray[Math.round(Math.random()*(nameOfArray.length))]",
+        w2: "nameOfArray[Math.round(Math.random()*(nameOfArray.length + 1))]",
+        w3: "nameOfArray[Math.floor(Math.random()*(nameOfArray.length())]"
     },
     {
-        c: "correct 9",
-        w1: "wrong 9-1",
-        w2: "wrong 9-2",
-        w3: "wrong 9-3"
+        c: "var fucntion nameOfFunction(){};",
+        w1: "function nameOfFunction(){};",
+        w2: "var nameOfFunction = function(){};",
+        w3: "var nameOfFunction = () => {};"
     },
     {
-        c: "correct 10",
-        w1: "wrong 10-1",
-        w2: "wrong 10-2",
-        w3: "wrong 10-3"
+        c: "getItem",
+        w1: "querySelector",
+        w2: "getElementById",
+        w3: "getElementsByClass"
     },
 ];
 //Get strings for initials, scores, and time-remaining if they exist and are not empty, otherwise they are "null".
@@ -128,51 +131,37 @@ else{
     timeRemaining= [];
 }
 
-console.log(initials);
-console.log(scores);
-console.log(timeRemaining);
+//correct.style.display= "none";
+//incorrect.style.display= "none";
+//answerChoiceDisplay.style.display= "none";
+//results.style.display= "none";
+//highScores.style.display="none";
 
-/* var displayScores= {
-    "initials": initials,
-    "scores": scores,
-    "time": timeRemaining,
-}; */
-var table= document.querySelector(".table");
-
+//
 for(var i=0; i<initials.length; i++){
 
-let newRow= table.insertRow(-1);
-let newCell1= newRow.insertCell(0);
-let newCell2= newRow.insertCell(1);
-let newCell3= newRow.insertCell(2);
+    let newRow= tableBody.insertRow(-1);
+    let newCell1= newRow.insertCell(0);
+    let newCell2= newRow.insertCell(1);
+    let newCell3= newRow.insertCell(2);
 
-let node1= document.createTextNode(initials[i]);
-let node2= document.createTextNode(scores[i]);
-let node3= document.createTextNode(timeRemaining[i]);
+    let node1= document.createTextNode(initials[i]);
+    let node2= document.createTextNode(scores[i]);
+    let node3= document.createTextNode(timeRemaining[i]);
 
-newCell1.appendChild(node1);
-newCell2.appendChild(node2);
-newCell3.appendChild(node3);
+    newCell1.appendChild(node1);
+    newCell2.appendChild(node2);
+    newCell3.appendChild(node3);
 };
 
-/*
-START BUTTON
-- add event listener
-- call function to start timer
-- display first question and answer choices
-*/
-
-results.style.display= "none";
-highScores.style.display="none";
-
 function startTimer() {
-    timerCount=20;
-    timerElement.textContent="60";
+    timerCount=120;
+    timerElement.textContent="120";
     /* nextButton.disabled = false; */
     answerChoiceDisplay.style.display = "block";
     timer= setInterval(function(){
         timerCount--;
-        timerElement.textContent= timerCount;
+        timerElement.textContent= timerCount + " seconds remaining!";
         if(timerCount === 0) {
             endGame();
         }
@@ -191,6 +180,7 @@ function startGame() {
     startButton.disabled = true;
     startButton.style.display= "none";
     highScores.style.display= "none";
+    answerChoiceDisplay.style.display= "block";
     currentQuestion= 0;
     score= 0;
     document.querySelector(".initials").value= " ";
@@ -211,33 +201,29 @@ function startGame() {
     option2.addEventListener("click", checkOption2);
     option3.addEventListener("click", checkOption3);
     option4.addEventListener("click", checkOption4);
-    /* nextButton.addEventListener("click", nextQuestion); */
 };
+
+startButton.addEventListener("click", startGame);
 
 function endGame() {
     clearInterval(timer);
     timerElement.textContent= "Your time is up! You answered " + score + " questions correctly.";
-    /* startButton.disabled = false;
-    startButton.textContent = "Try Again"; */
-    /* nextButton.disabled = true; */
     answerChoiceDisplay.style.display= "none";
     questions.style.display= "none";
     results.style.display= "block";
 }
 
-startButton.addEventListener("click", startGame);
-
 function nextQuestion(){
     currentQuestion++;
     if (currentQuestion>9){
-        /* nextButton.disabled= true; */
         option1.removeEventListener("click", checkOption1);
         option2.removeEventListener("click", checkOption2);
         option3.removeEventListener("click", checkOption3);
         option4.removeEventListener("click", checkOption4);
         if(timerCount <= 0) {
             timerCount = 0;
-            endGame();}
+            endGame();
+        }
         clearInterval(timer);
         answerChoiceDisplay.style.display= "none";
         questions.style.display= "none";
@@ -250,7 +236,8 @@ function nextQuestion(){
         answerChoices[currentQuestion].c,
         answerChoices[currentQuestion].w1,
         answerChoices[currentQuestion].w2,
-        answerChoices[currentQuestion].w3];
+        answerChoices[currentQuestion].w3
+    ];
     shuffle(answersArray);
     option1.textContent= answersArray[0];
     option2.textContent= answersArray[1];
@@ -262,10 +249,12 @@ function checkOption1(){
     if(option1.textContent===answerChoices[currentQuestion].c){
         score++;
         console.log(score);
+        showCorrect();
         nextQuestion();
     }
     else{
         timerCount = timerCount-3;
+        showIncorrect();
         nextQuestion();
     }
 }
@@ -274,10 +263,12 @@ function checkOption2(){
     if(option2.textContent===answerChoices[currentQuestion].c){
         score++;
         console.log(score);
+        showCorrect();
         nextQuestion();
     }
     else{
         timerCount = timerCount-3;
+        showIncorrect();
         nextQuestion();
     }
 }
@@ -286,10 +277,12 @@ function checkOption3(){
     if(option3.textContent===answerChoices[currentQuestion].c){
         score++;
         console.log(score);
+        showCorrect();
         nextQuestion();
     }
     else{
         timerCount = timerCount-3;
+        showIncorrect();
         nextQuestion();
     }
 };
@@ -298,120 +291,71 @@ function checkOption4(){
     if(option4.textContent===answerChoices[currentQuestion].c){
         score++;
         console.log(score);
+        showCorrect();
         nextQuestion();
     }
     else{
         timerCount = timerCount-3;
+        showIncorrect();
         nextQuestion();
     }
 }
 
 submit.addEventListener("click", function() {
+    //Store user's initials
     var input= document.querySelector(".initials").value;
 
+    //Add the most recent initials, score, and time remaining to their respective arrays.
     scores.push(score);
     initials.push(input);
     timeRemaining.push(timerCount);
     
+    //Convert the arrays containing the initials, scores, and times remaining into strings and save them to local storage.
     localStorage.setItem("initials", JSON.stringify(initials));
     localStorage.setItem("correct answers", JSON.stringify(scores));
     localStorage.setItem("time remaining", JSON.stringify(timeRemaining));
     
-    /* let initials= document.createElement("p");        
-    let correctAnswers= document.createElement("p");        
-    let timeRemaining = document.createElement("p");        
-
-    initials.textContent= localStorage.getItem("initials");
-    correctAnswers.textContent= localStorage.getItem("correct answers");
-    timeRemaining.textContent= localStorage.getItem("time remaining");
-
-    highScores.append(initials, correctAnswers, timeRemaining);
-    initials.style.display="inline";
-    correctAnswers.style.display="inline";
-    timeRemaining.style.display="inline"; */
-
-
-    
-    let newRow= table.insertRow(-1);
+    //Create a row in the table
+    let newRow= tableBody.insertRow(-1);
     let newCell1= newRow.insertCell(0);
     let newCell2= newRow.insertCell(1);
     let newCell3= newRow.insertCell(2);
-
+    //Create nodes containing the most recent initials, score, and time remaining
     let node1= document.createTextNode(initials[initials.length-1]);
     let node2= document.createTextNode(scores[scores.length-1]);
     let node3= document.createTextNode(timeRemaining[timeRemaining.length-1]);
-
+    //Fill the last row of the table with the nodes
     newCell1.appendChild(node1);
     newCell2.appendChild(node2);
     newCell3.appendChild(node3);
 
     highScores.style.display="block";
     results.style.display="none";
+    table.style.display= "block";
 });
 
 tryAgain.addEventListener("click", function() {
+    incorrect.style.display= "none";
+    correct.style.display= "none";
     answerChoiceDisplay.style.display= "block";
     questions.style.display= "block";
     results.style.display= "none";
     startGame();
 });
 
-/* for (const [key, value] of Object.entries(questionBank)) {
-    console.log(`${key} ${value}`);
-}
- */
+clearScores.addEventListener("click", function(){
+    localStorage.clear();
+    tableBody.innerHTML = "";
+    table.style.display= "none";
+    
+});
 
-
-
-
-/* console.log(questionBank.q3);
-console.log(answerChoices.q1[0]) */
-/*var correctAnswers= {
-    a1: 'answer 1',
-    a2: 'answer 2',
-    a3: 'answer 3',
-    a4: 'answer 4',
-    a5: 'answer 5',
-    a6: 'answer 6',
-    a7: 'answer 7',
-    a8: 'answer 8',
-    a9: 'answer 9',
-    a10: 'answer 10',
+function showCorrect () {
+    correct.style.display= "block";
+    incorrect.style.display= "none";
 };
 
-var distractors= {
-    d1_1: 'distractor 1-1',
-    d1_2: 'distractor 1-2',
-    d1_3: 'distractor 1-3',
-    d2_1: 'distractor 2-1',
-    d2_2: 'distractor 2-2',
-    d2_3: 'distractor 2-3',
-    d3_1: 'distractor 3-1',
-    d3_2: 'distractor 3-2',
-    d3_3: 'distractor 3-3',
-    d4_1: 'distractor 4-1',
-    d4_2: 'distractor 4-2',
-    d4_3: 'distractor 4-3',
-    d5_1: 'distractor 5-1',
-    d5_2: 'distractor 5-2',
-    d5_3: 'distractor 5-3',
-    d6_1: 'distractor 6-1',
-    d6_2: 'distractor 6-2',
-    d6_3: 'distractor 6-3',
-    d7_1: 'distractor 7-1',
-    d7_2: 'distractor 7-2',
-    d7_3: 'distractor 7-3',
-    d8_1: 'distractor 8-1',
-    d8_2: 'distractor 8-2',
-    d8_3: 'distractor 8-3',
-    d9_1: 'distractor 9-1',
-    d9_2: 'distractor 9-2',
-    d9_3: 'distractor 9-3',
-    d10_1: 'distractor 10-1',
-    d10_2: 'distractor 10-2',
-    d10_3: 'distractor 10-3',
-}; */
-
-
-
-
+function showIncorrect () {
+    incorrect.style.display= "block";
+    correct.style.display= "none";
+};

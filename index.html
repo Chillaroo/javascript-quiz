@@ -15,15 +15,17 @@
         <main>
             <div class= "timer"></div>
                 <!-- <div class= "timer-text"></div> -->
-                <div class= "timer-count">60</div>
+                <div class= "timer-count">120 seconds</div>
             <div class= "questions"></div>
             <div class= "answer-choices">
                 <ul>
-                    <li class= "option1"></li>
-                    <li class= "option2"></li>
-                    <li class= "option3"></li>
-                    <li class= "option4"></li>
+                    <li class= "option1">Option 1</li>
+                    <li class= "option2">Option 2</li>
+                    <li class= "option3">Option 3</li>
+                    <li class= "option4">Option 4</li>
                 </ul>
+                <p id="correct">Correct!</p>
+                <p id="incorrect">Incorrect! -3 Seconds!</p>
             </div>
             <!-- <button class= "next-button">Next</button> -->
             <div class= "results">
@@ -33,9 +35,9 @@
             </div>
             <div class= "high-scores">
                 <button class= "try-again">Try Again</button>
-                <button>Clear Scores</button>
+                <button class= "clear-scores">Clear Scores</button>
                 <!-- <p>High Scores Banner</p> -->
-                <table>
+                <table class= "table">
                     <thead>
                         <tr>
                             <th>Initials</th>
@@ -43,7 +45,7 @@
                             <th>Seconds Remaining</th>
                         </tr>
                     </thead>
-                    <tbody class= "table"></tbody>
+                    <tbody class= "table-body"></tbody>
                 </table>
             </div>
         </main>
