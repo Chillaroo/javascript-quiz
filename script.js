@@ -1,20 +1,3 @@
-/* GIVEN I am taking a code quiz
-WHEN I click the start button
-THEN a timer starts and I am presented with a question
-
-WHEN I answer a question
-THEN I am presented with another question
-
-WHEN I answer a question incorrectly
-THEN time is subtracted from the clock
-
-WHEN all questions are answered or the timer reaches 0
-THEN the game is over
-
-WHEN the game is over
-THEN I can save my initials and my score
- */
-
 var startButton= document.querySelector(".start-button");
 var timerElement= document.querySelector(".timer-count");
 var questions= document.querySelector(".questions");
@@ -58,10 +41,10 @@ var answerChoices= [
         w3: "();"
     },
     {
-        c: "nameOfElement.addEventListener(\"event\",nameOfFunction)",
-        w1: "nameOfElement.addEventListener(nameOfFunction,\"event\")",
-        w2: "addEventListener.nameOfElement(\"event\",nameOfFunction)",
-        w3: "addEventListener.nameOfElement(nameOfFunction,\"event\")"
+        c: "nameOfElement.addEventListener(\"event\", nameOfFunction)",
+        w1: "nameOfElement.addEventListener(nameOfFunction, \"event\")",
+        w2: "addEventListener.nameOfElement(\"event\", nameOfFunction)",
+        w3: "addEventListener.nameOfElement(nameOfFunction, \"event\")"
     },
     {
         c: "nameOfArray[1]",
@@ -131,13 +114,11 @@ else{
     timeRemaining= [];
 }
 
-//correct.style.display= "none";
-//incorrect.style.display= "none";
-//answerChoiceDisplay.style.display= "none";
-//results.style.display= "none";
-//highScores.style.display="none";
-
-//
+correct.style.display= "none";
+incorrect.style.display= "none";
+answerChoiceDisplay.style.display= "none";
+results.style.display= "none";
+highScores.style.display="none";
 for(var i=0; i<initials.length; i++){
 
     let newRow= tableBody.insertRow(-1);
@@ -156,7 +137,6 @@ for(var i=0; i<initials.length; i++){
 
 function startTimer() {
     timerCount=120;
-    timerElement.textContent="120";
     /* nextButton.disabled = false; */
     answerChoiceDisplay.style.display = "block";
     timer= setInterval(function(){
@@ -331,7 +311,7 @@ submit.addEventListener("click", function() {
 
     highScores.style.display="block";
     results.style.display="none";
-    table.style.display= "block";
+    table.style.display= "table";
 });
 
 tryAgain.addEventListener("click", function() {
